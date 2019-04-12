@@ -4,6 +4,7 @@
 # @Time    : 2019/4/11 0011 上午 10:40
 import math
 import os
+import argparse
 import scipy as sp
 import scipy.misc
 import numpy as np
@@ -82,12 +83,42 @@ def register(img_dir, source_img_name, roi_region):
             print('registration error: {}'.format(new_xml_path))
 
 
-if __name__ == '__main__':
-    img_dir_path = r'E:\dataset\third-part\P1\type1\2\even'
-    source_img = '000776.jpg'
-    roi = {'xmin': 270,
-           'ymin': 530,
-           'xmax': 520,
-           'ymax': 600}
+def run():
+    parser = argparse.ArgumentParser(description="your script description")  # --help
+    parser.add_argument('--image_dir', '-d', help='image dir path')
+    parser.add_argument('--source_name', '-n', help='filename of source image existed in image_dir, like "000001.jpg".'
+                                                    'And the source xml file needed be existed in image_dir'
+                                                    'by the name of "000001.xml".')
+    parser.add_argument('--xmin', '-l', help='xmin used to register '
+                                             'in the format of [xmin, ymin, xmax, ymax]')
+    parser.add_argument('--ymin', '-t', help='ymin used to register '
+                                             'in the format of [xmin, ymin, xmax, ymax]')
+    parser.add_argument('--xmax', '-r', help='xmax used to register '
+                                             'in the format of [xmin, ymin, xmax, ymax]')
+    parser.add_argument('--ymax', '-b', help='ymax used to register '
+                                             'in the format of [xmin, ymin, xmax, ymax]')
+    args = parser.parse_args()
 
-    register(img_dir_path, source_img, roi)
+    image_dir = args.image_dir
+    source_img_name = args.source_name
+    xmin = args.xmin
+    ymin = args.ymin
+    xmax = args.xmax
+    ymax = args.ymax
+    roi = {'xmin': xmin, 'ymin': ymin, 'xmax': xmax, 'ymax': ymax}
+    register(image_dir, source_img_name, roi)
+
+
+if __name__ == '__main__':
+    run()
+
+
+# if __name__ == '__main__':
+#     img_dir_path = r'.\demo\type1\2\even'
+#     source_img = '000776.jpg'
+#     roi = {'xmin': 270,
+#            'ymin': 530,
+#            'xmax': 520,
+#            'ymax': 600}
+#
+#     register(img_dir_path, source_img, roi)
