@@ -17,4 +17,8 @@
 ## imreg-dft
 [imreg-dft](https://github.com/matejak/imreg_dft)使用离散傅里叶变换实现了图像的校准(registration), 
 
-矢量坐标转换参考了计算机图形学的[知识](https://www.zhihu.com/question/52027040).
+矢量坐标转换参考了计算机图形学的[知识](https://www.zhihu.com/question/52027040)。
+
+
+## sift feature
+加入sift图像校准方法。
